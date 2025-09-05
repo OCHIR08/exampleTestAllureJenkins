@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DemoTest {
 
     @Test
-    @Description("Тест, который всегда проходит (passed)")
+    @Description("Тест,  который всегда проходит (passed)")
     void testPassed() {
         assertTrue(true);
     }
