@@ -9,15 +9,22 @@ pipeline {
             }
         }
 
-        stage('Build & Test') {
-            steps {
-                script {
-                    // для Mac/Linux
-                    sh 'chmod +x gradlew'
-                    sh './gradlew clean test || true'
-                }
-            }
+stage('Build & Test') {
+    steps {
+        script {
+            sh 'chmod +x gradlew'
+            sh './gradlew clean test'
         }
+    }
+    post {
+        always {
+            allure([
+                results: [[path: 'build/allure-results']],
+                reportBuildPolicy: 'ALWAYS'
+            ])
+        }
+    }
+}
 
         stage('Allure Report') {
             steps {
@@ -29,10 +36,10 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            // сохраняем результаты сборки
-            archiveArtifacts artifacts: 'build/allure-results/**', allowEmptyArchive: true
-        }
-    }
-}
+//     post {
+//         always {
+//             // сохраняем результаты сборки
+//             archiveArtifacts artifacts: 'build/allure-results/**', allowEmptyArchive: true
+//         }
+//     }
+// }
