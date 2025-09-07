@@ -9,37 +9,21 @@ pipeline {
             }
         }
 
-stage('Build & Test') {
-    steps {
-        script {
-            sh 'chmod +x gradlew'
-            sh './gradlew clean test'
-        }
-    }
-    post {
-        always {
-            allure([
-                results: [[path: 'build/allure-results']],
-                reportBuildPolicy: 'ALWAYS'
-            ])
-        }
-    }
-}
-
-        stage('Allure Report') {
+        stage('Build & Test') {
             steps {
-                allure([
-                    results: [[path: 'build/allure-results']],
-                    reportBuildPolicy: 'ALWAYS'
-                ])
+                script {
+                    sh 'chmod +x gradlew'
+                    sh './gradlew clean test'
+                }
+            }
+            post {
+                always {
+                    allure([
+                        results: [[path: 'build/allure-results']],
+                        reportBuildPolicy: 'ALWAYS'
+                    ])
+                }
             }
         }
     }
-
-//     post {
-//         always {
-//             // сохраняем результаты сборки
-//             archiveArtifacts artifacts: 'build/allure-results/**', allowEmptyArchive: true
-//         }
-//     }
-// }
+}
