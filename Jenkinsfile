@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        jdk 'JDK17'   // Имя JDK, настроенное в Jenkins (Manage Jenkins → Global Tool Configuration)
-    }
-
     stages {
         stage('Checkout') {
             steps {
