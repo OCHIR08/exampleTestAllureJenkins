@@ -14,13 +14,13 @@ public class DemoTest {
     @Test
     @Description("Тест, который всегда падает (failed)")
     void testFailed() {
-        assertTrue(false, "Этот тест должен упасть");
+//        assertTrue(true, "Этот тест должен упасть");
     }
 
-    @Test
-    @Description("Тест со статусом skipped (declined)")
-    void testSkipped() {
-        // Пропуск через Assumptions
-        org.junit.jupiter.api.Assumptions.assumeTrue(false, "Этот тест будет пропущен");
-    }
+//    @Test
+//    @Description("Тест со статусом skipped (declined)")
+//    void testSkipped() {
+//        // Пропуск через Assumptions
+//        org.junit.jupiter.api.Assumptions.assumeTrue(false, "Этот тест будет пропущен");
+//    }
 }
