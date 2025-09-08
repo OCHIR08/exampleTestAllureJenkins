@@ -16,13 +16,15 @@ pipeline {
                     sh './gradlew clean test'
                 }
             }
-            post {
-                always {
-                    allure([
-                        results: [[path: 'build/allure-results']],
-                        reportBuildPolicy: 'ALWAYS'
-                    ])
-                }
+        }
+
+        stage('Allure Report') {
+            steps {
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    results: [[path: 'build/allure-results']]
+                ])
             }
         }
     }
